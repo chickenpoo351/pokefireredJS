@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite"
+    "dev": "vite",
+    "build:fr10": "vite build --mode fr10",
+    "build:fr11": "vite build --mode fr11",
+    "build:lg10": "vite build --mode lg10",
+    "build:lg11": "vite build --mode lg11",
+    "build:all": "npm run build:fr10 && npm run build:fr11 && npm run build:lg10 && npm run build:lg11"
   },
   "keywords": [],
   "author": "",
