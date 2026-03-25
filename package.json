@@ -16,6 +16,7 @@
   "author": "",
   "license": "",
   "packageManager": "pnpm@10.17.1",
+  "type": "module",
   "devDependencies": {
     "vite": "^8.0.2"
   }
