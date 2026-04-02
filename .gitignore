@@ -1,1 +1,4 @@
 node_modules
+*.gba
+Assets/monImages
+Assets/sounds

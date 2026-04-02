@@ -19,5 +19,8 @@
   "type": "module",
   "devDependencies": {
     "vite": "^8.0.2"
+  },
+  "dependencies": {
+    "silphscope": "^1.0.0"
   }
 }
