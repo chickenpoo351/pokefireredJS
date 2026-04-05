@@ -3,3 +3,7 @@ hi! so erm this is a interesting project... it will essentially be an attempt to
 until I make some decent-ish progress though this readme won't be updated for a bit
 
 Note: this isn't abandoned... I am simply just working on the asset extraction part of the engine over [here](https://github.com/chickenpoo351/SilphScope) :D (I doubt anyone is reading this though... but if you are hello!)
+
+new update:
+
+currently banging my head against the wall trying to figure out the sprite system... :[ erm updates eventually once I figure out how I am going to do stuff...
