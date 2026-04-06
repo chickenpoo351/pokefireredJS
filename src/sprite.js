@@ -9,7 +9,7 @@ function makeDummySprite() {
     return {
         // lifecycle thingies :p
         inUse: false,
-        callback: () => {}, // so turns out sprites are kinda like tasks but in disguise or something... anyway this lets the run logic
+        callback: () => { }, // so turns out sprites are kinda like tasks but in disguise or something... anyway this lets the run logic
         // simple posistioning stuff
         x: 0,
         y: 0,
@@ -60,10 +60,10 @@ export function resetAllSprites() {
 }
 
 function initSprite(sprite, template, x, y, subpriority) {
-    resetSprite(gSprites[i]);
+    resetSprite(sprite);
     sprite.inUse = true;
     sprite.template = template;
-    sprite.callback = template.callback || (() => {});
+    sprite.callback = template.callback || (() => { });
     sprite.anims = template.anims || null;
     sprite.images = template.images || null;
     sprite.x = x;
@@ -83,7 +83,7 @@ export function createSprite(template, x, y, subpriority = 0) { // boom now spri
 }
 
 export function createSpriteAtEnd(template, x, y, subpriority = 0) { // specifically for well creating sprites at the end of the list as for why you would want to do this I don't know but will probably find out sooner or later :p
-    for (let i = MAX_SPRITES -1; i > -1; i--) {
+    for (let i = MAX_SPRITES - 1; i > -1; i--) {
         const sprite = gSprites[i];
         if (!sprite.inUse) {
             initSprite(gSprites[i], template, x, y, subpriority);
@@ -98,4 +98,72 @@ export function createInvisibleSprite(callback) { // basically allows a sprite t
     if (id === MAX_SPRITES) return id;
     gSprites[id].visible = false;
     return id;
+}
+
+export function startSpriteAnim(sprite, animNum) {
+    sprite.animNum = animNum;
+    sprite.animBeginning = true;
+    sprite.animEnded = false;
+}
+
+function applyFrame(sprite, cmd) {
+    sprite.currentFrame = cmd.imageValue ?? 0;
+    sprite.animDelayCounter = Math.max(0, (cmd.duration ?? 1) -1);
+
+}
+
+function beginAnim(sprite) {
+    const anim = sprite.anims[sprite.animNum];
+    if (!anim || anim.length === 0) return;
+    sprite.animCmdIndex = 0;
+    sprite.animLoopCounter = 0;
+    sprite.animEnded = false;
+    sprite.animBeginning = false;
+    applyFrame(sprite, anim[0]);
+}
+
+function continueAnim(sprite) {
+    const anim = sprite.anims[sprite.animNum];
+    if (!anim) return;
+    if (sprite.animDelayCounter > 0) {
+        sprite.animDelayCounter--;
+        return;
+    }
+    if (sprite.animPaused) return;
+    sprite.animCmdIndex++;
+    if (sprite.animCmdIndex >= anim.length) {
+        sprite.animCmdIndex = 0; // should suffice for a loop fallback I think... honestly have no idea as to if I am even doing anything right anymore... :p
+    }
+    const cmd = anim[sprite.animCmdIndex];
+    if (!cmd) return;
+    switch (cmd.type) {
+        case "frame":
+            applyFrame(sprite, cmd);
+            break;
+        case "jump":
+            sprite.animCmdIndex = cmd.target;
+            break;
+        case "end":
+            sprite.animEnded = true;
+            sprite.animCmdIndex--;
+            break;
+        case "loop":
+            if (sprite.animLoopCounter === 0) {
+                sprite.animLoopCounter = cmd.count;
+            }
+            sprite.animLoopCounter--;
+            if (sprite.animLoopCounter > 0) {
+                sprite.animCmdIndex = cmd.target ?? 0;
+            }
+            break;
+    }
+}
+
+export function animateSprite(sprite) {
+    if (!sprite.anims || sprite.animPaused) return;
+    if (sprite.animBeginning) {
+        beginAnim(sprite);
+    } else {
+        continueAnim(sprite);
+    }
 }
