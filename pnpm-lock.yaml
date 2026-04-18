@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       silphscope:
-        specifier: ^1.2.28
-        version: 1.2.28
+        specifier: ^1.2.31
+        version: 1.2.31
     devDependencies:
       vite:
         specifier: ^8.0.8
@@ -244,8 +244,8 @@ packages:
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
 
-  silphscope@1.2.28:
-    resolution: {integrity: sha512-VdB7MKNuQtCTNhhciveWkfhqz4By4D9Rt5NRMEsX4b1u/8jQ4dvgLMoRMgT7xuqU9od+fpsaeYwEryn+dde+3A==}
+  silphscope@1.2.31:
+    resolution: {integrity: sha512-Kya0kD7WSNECaTQ5RNaA3nxvkGW/98klFDnp48/WqZZcJtMGeASpw98ONJ3J/79fSOrHLBAFTyHdo3F0a2NDxQ==}
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
@@ -477,7 +477,7 @@ snapshots:
       '@rolldown/binding-win32-arm64-msvc': 1.0.0-rc.15
       '@rolldown/binding-win32-x64-msvc': 1.0.0-rc.15
 
-  silphscope@1.2.28:
+  silphscope@1.2.31:
     dependencies:
       pngjs: 7.0.0
 
