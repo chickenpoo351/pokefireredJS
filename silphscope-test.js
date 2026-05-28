@@ -6,4 +6,6 @@ await renderAllGraphics(rom, {
   outputMonDir: "./Assets/monImages",
   outputIconDir: "./Assets/Icons",
   outputTrainerDir: "./Assets/Trainers",
+  outputMoveDir: "./Assets/Moves",
+  sortUnusedMoves: true,
 })
